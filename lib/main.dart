@@ -11,19 +11,40 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      )    );
+        title: 'Tag File Management',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Scaffold(
+            body: Container(
+          child: Center(
+            child: const Text("TAGS",
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+          child: Stack(children: <Widget>[
+            Container(
+              width: 100,
+              height: 100,
+              color: Colors.red,
+              child: const Text("Books"),
+            ),
+            Container(
+              width: 250,
+              height: 250,
+              color: Colors.black,
+            ), //Container
+            Container(
+              height: 200,
+              width: 200,
+              color: Colors.purple,
+            ),
+          ]),
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
+          color: Color.fromARGB(255, 144, 178, 205),
+          height: 1000,
+          width: 700,
+        ))));
   }
 }
 
