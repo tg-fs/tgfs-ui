@@ -15,9 +15,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var tagList = <String>[];
+  var fileNames = <String>[];
+  var filePaths = <String>[];
   @override
   void initState() {
     tagList = ["movies", "books", "music"];
+    fileNames = ["inferno.pdf", "japanesesong.mp3", "bottle.png"];
+    filePaths = ["/home/lain", "/mnt/hd1/music", "/home/chococandy/Pictures"];
     super.initState();
   }
 
