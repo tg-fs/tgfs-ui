@@ -6,8 +6,20 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var tagList = <String>[];
+  @override
+  void initState() {
+    tagList = ["movies", "books", "music"];
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
@@ -21,12 +33,12 @@ class MyApp extends StatelessWidget {
           body: Row(
             children: <Widget>[
               Expanded(
-                  child: Container(
-                padding: const EdgeInsets.all(30),
-                height: 1000,
-                width: 400,
-                color: mainColor,
-                child: Column(
+                child: Container(
+                  padding: const EdgeInsets.all(30),
+                  height: 1000,
+                  width: 400,
+                  color: mainColor,
+                  child: Column(
 //column properities:
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,55 +63,36 @@ class MyApp extends StatelessWidget {
 
 //2nd Column:
                       Expanded(
-                        child: ListView(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.all(10.0),
-                          children: <Widget>[
-                            Container(
-                                padding: const EdgeInsets.all(10),
-                                child: Row(children: const [
+                        child: ListView.builder(
+                          itemCount: tagList.length,
+                          itemBuilder: (context, i) {
+                            return Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                children: [
                                   Text(
-                                    "Books",
-                                    style: TextStyle(
+                                    tagList.elementAt(i),
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 40,
                                         fontStyle: FontStyle.italic),
                                   ),
-                                  Icon(Icons.remove, size: 40),
-                                  Icon(Icons.edit, size: 40)
-                                ])),
-                            Container(
-                                padding: const EdgeInsets.all(10),
-                                child: const Text(
-                                  'Music',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 40,
-                                      fontStyle: FontStyle.italic),
-                                )),
-                            Container(
-                                padding: const EdgeInsets.all(10),
-                                child: const Text(
-                                  'Games',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 40,
-                                      fontStyle: FontStyle.italic),
-                                )),
-                            Container(
-                                padding: const EdgeInsets.all(10),
-                                child: const Text(
-                                  'Movies',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 40,
-                                      fontStyle: FontStyle.italic),
-                                )),
-                          ],
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                  const Icon(Icons.remove, size: 32),
+                                  const SizedBox(width: 12),
+                                  const Icon(Icons.edit, size: 32)
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       )
-                    ]),
-              )),
+                    ],
+                  ),
+                ),
+              ),
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.all(30),
