@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:tgfs_ui/vars.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
                 padding: const EdgeInsets.all(30),
                 height: 1000,
                 width: 400,
-                color: const Color.fromARGB(255, 88, 95, 100),
+                color: mainColor,
                 child: Column(
 //column properities:
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -40,8 +42,7 @@ class MyApp extends StatelessWidget {
                                   child: Text('TAGS',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 249, 249, 249),
+                                          color: Colors.white,
                                           fontSize: 40,
                                           fontWeight: FontWeight.bold))),
                               Expanded(child: Icon(Icons.add, size: 50.0))
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
                                   Text(
                                     "Books",
                                     style: TextStyle(
-                                        color: Color.fromARGB(255, 42, 20, 33),
+                                        color: Colors.white,
                                         fontSize: 40,
                                         fontStyle: FontStyle.italic),
                                   ),
@@ -72,7 +73,7 @@ class MyApp extends StatelessWidget {
                                 child: const Text(
                                   'Music',
                                   style: TextStyle(
-                                      color: Color.fromARGB(255, 42, 20, 33),
+                                      color: Colors.white,
                                       fontSize: 40,
                                       fontStyle: FontStyle.italic),
                                 )),
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
                                 child: const Text(
                                   'Games',
                                   style: TextStyle(
-                                      color: Color.fromARGB(255, 42, 20, 33),
+                                      color: Colors.white,
                                       fontSize: 40,
                                       fontStyle: FontStyle.italic),
                                 )),
@@ -90,7 +91,7 @@ class MyApp extends StatelessWidget {
                                 child: const Text(
                                   'Movies',
                                   style: TextStyle(
-                                      color: Color.fromARGB(255, 42, 20, 33),
+                                      color: Colors.white,
                                       fontSize: 40,
                                       fontStyle: FontStyle.italic),
                                 )),
@@ -104,13 +105,11 @@ class MyApp extends StatelessWidget {
                   padding: const EdgeInsets.all(30),
                   height: 1000,
                   width: 800,
-                  color: const Color.fromARGB(255, 167, 176, 183),
+                  color: shadeColor,
                   child: const Text('FOLDERS',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold)),
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
                 ),
               )
             ],
