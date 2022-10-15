@@ -150,7 +150,7 @@ class _MyAppState extends State<MyApp> {
                           itemBuilder: (context, i) {
                             return Container(
                               padding: const EdgeInsets.all(10),
-                              child: Column(
+                              child: Row(
                                 children: [
                                   Expanded(
                                     child: TextButton(
