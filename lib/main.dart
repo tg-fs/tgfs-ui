@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
           body: Row(
             children: <Widget>[
               Expanded(
+                flex: 1,
                 child: Container(
                   padding: const EdgeInsets.all(30),
                   height: 1000,
@@ -118,6 +119,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Container(
                   padding: const EdgeInsets.all(30),
                   height: 1000,
