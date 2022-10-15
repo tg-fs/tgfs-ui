@@ -138,11 +138,10 @@ class _MyAppState extends State<MyApp> {
                     width: 800,
                     color: shadeColor,
                     child: Column(children: [
-                      Container(
-                          child: const Text('FOLDERS',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 40, fontWeight: FontWeight.bold))),
+                      const Text('FOLDERS',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.bold)),
                       Expanded(
                         child: ListView.builder(
                           //fileNames and filePaths
@@ -150,39 +149,23 @@ class _MyAppState extends State<MyApp> {
                           itemBuilder: (context, i) {
                             return Container(
                               padding: const EdgeInsets.all(10),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Expanded(
-                                    child: TextButton(
-                                        onPressed: () {
-                                          // Implement tag click
-                                          print("file ${fileNames[i]} clicked");
-                                        },
-                                        child: Text(
-                                          fileNames.elementAt(i),
-                                          textAlign: TextAlign.left,
-                                          style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 18, 15, 15),
-                                              fontSize: 40,
-                                              fontStyle: FontStyle.italic),
-                                        )),
+                                  Text(
+                                    fileNames.elementAt(i),
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        color: Color.fromARGB(255, 18, 15, 15),
+                                        fontSize: 18,
+                                        fontStyle: FontStyle.italic),
                                   ),
-                                  Expanded(
-                                    child: TextButton(
-                                        onPressed: () {
-                                          // Implement tag click
-                                          print("file ${filePaths[i]} path");
-                                        },
-                                        child: Text(
-                                          filePaths.elementAt(i),
-                                          textAlign: TextAlign.left,
-                                          style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 18, 15, 15),
-                                              fontSize: 40,
-                                              fontStyle: FontStyle.italic),
-                                        )),
+                                  Text(
+                                    filePaths.elementAt(i),
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        color: Color.fromARGB(255, 18, 15, 15),
+                                        fontSize: 18,
+                                        fontStyle: FontStyle.italic),
                                   )
                                 ],
                               ),
