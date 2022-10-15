@@ -131,18 +131,67 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
               Expanded(
-                flex: 2,
-                child: Container(
-                  padding: const EdgeInsets.all(30),
-                  height: 1000,
-                  width: 800,
-                  color: shadeColor,
-                  child: const Text('FOLDERS',
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
-                ),
-              )
+                  flex: 2,
+                  child: Container(
+                    padding: const EdgeInsets.all(30),
+                    height: 1000,
+                    width: 800,
+                    color: shadeColor,
+                    child: Column(children: [
+                      Container(
+                          child: const Text('FOLDERS',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 40, fontWeight: FontWeight.bold))),
+                      Expanded(
+                        child: ListView.builder(
+                          //fileNames and filePaths
+                          itemCount: fileNames.length,
+                          itemBuilder: (context, i) {
+                            return Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: TextButton(
+                                        onPressed: () {
+                                          // Implement tag click
+                                          print("file ${fileNames[i]} clicked");
+                                        },
+                                        child: Text(
+                                          fileNames.elementAt(i),
+                                          textAlign: TextAlign.left,
+                                          style: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 18, 15, 15),
+                                              fontSize: 40,
+                                              fontStyle: FontStyle.italic),
+                                        )),
+                                  ),
+                                  Expanded(
+                                    child: TextButton(
+                                        onPressed: () {
+                                          // Implement tag click
+                                          print("file ${filePaths[i]} path");
+                                        },
+                                        child: Text(
+                                          filePaths.elementAt(i),
+                                          textAlign: TextAlign.left,
+                                          style: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 18, 15, 15),
+                                              fontSize: 40,
+                                              fontStyle: FontStyle.italic),
+                                        )),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ]),
+                  ))
             ],
           ),
           // margin: const EdgeInsets.all(10),
