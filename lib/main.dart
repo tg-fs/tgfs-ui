@@ -47,18 +47,28 @@ class _MyAppState extends State<MyApp> {
                       //first column
                       Expanded(
                         child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: const <Widget>[
-                              Expanded(
-                                  child: Text('TAGS',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 40,
-                                          fontWeight: FontWeight.bold))),
-                              Expanded(child: Icon(Icons.add, size: 50.0))
-                            ]),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const <Widget>[
+                            Expanded(
+                              child: Text(
+                                'TAGS',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Expanded(
+                              child: Icon(
+                                Icons.add,
+                                size: 50.0,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
 
 //2nd Column:
@@ -85,9 +95,17 @@ class _MyAppState extends State<MyApp> {
                                     Expanded(
                                       child: Container(),
                                     ),
-                                    const Icon(Icons.remove, size: 32),
+                                    const Icon(
+                                      Icons.remove,
+                                      size: 32,
+                                      color: Colors.white,
+                                    ),
                                     const SizedBox(width: 12),
-                                    const Icon(Icons.edit, size: 32)
+                                    const Icon(
+                                      Icons.edit,
+                                      size: 32,
+                                      color: Colors.white,
+                                    )
                                   ],
                                 ),
                               ),
