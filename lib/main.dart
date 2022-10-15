@@ -16,35 +16,115 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
-            body: Container(
-          child: Center(
-            child: const Text("TAGS",
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
-          child: Stack(children: <Widget>[
-            Container(
-              width: 100,
-              height: 100,
-              color: Colors.red,
-              child: const Text("Books"),
-            ),
-            Container(
-              width: 250,
-              height: 250,
-              color: Colors.black,
-            ), //Container
-            Container(
-              height: 200,
-              width: 200,
-              color: Colors.purple,
-            ),
-          ]),
-          margin: const EdgeInsets.all(10),
-          padding: const EdgeInsets.all(10),
-          color: Color.fromARGB(255, 144, 178, 205),
-          height: 1000,
-          width: 700,
-        ))));
+          body: Row(
+            children: <Widget>[
+              Expanded(
+                  child: Container(
+                child: Column(
+//column properities:
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    //column children:
+                    children: [
+                      //first column
+                      Expanded(
+                        child: Container(
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
+                                    child: Container(
+                                        child: Text('TAGS',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 249, 249, 249),
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold)))),
+                                Expanded(
+                                    child: Container(
+                                        child: Icon(Icons.add, size: 50.0)))
+                              ]),
+                        ),
+                      ),
+
+//2nd Column:
+                      Expanded(
+                        child: ListView(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(10.0),
+                          children: <Widget>[
+                            Container(
+                                padding: EdgeInsets.all(10),
+                                child: Row(children: [
+                                  Text(
+                                    "Books",
+                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 42, 20, 33),
+                                        fontSize: 40,
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                  Icon(Icons.remove, size: 40),
+                                  Icon(Icons.edit, size: 40)
+                                ])),
+                            Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  'Music',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 42, 20, 33),
+                                      fontSize: 40,
+                                      fontStyle: FontStyle.italic),
+                                )),
+                            Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  'Games',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 42, 20, 33),
+                                      fontSize: 40,
+                                      fontStyle: FontStyle.italic),
+                                )),
+                            Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  'Movies',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 42, 20, 33),
+                                      fontSize: 40,
+                                      fontStyle: FontStyle.italic),
+                                )),
+                          ],
+                        ),
+                      )
+                    ]),
+                padding: EdgeInsets.all(30),
+                height: 1000,
+                width: 400,
+                color: Color.fromARGB(255, 88, 95, 100),
+              )),
+              Expanded(
+                  child: Container(
+                child: Text('FOLDERS',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold)),
+                padding: EdgeInsets.all(30),
+                height: 1000,
+                width: 800,
+                color: Color.fromARGB(255, 167, 176, 183),
+              ))
+            ],
+          ),
+          // margin: const EdgeInsets.all(10),
+          // padding: const EdgeInsets.all(10),
+          // color: Color.fromARGB(255, 144, 178, 205),
+          // height: 1000,
+          // width: 700,
+        ));
   }
 }
 
