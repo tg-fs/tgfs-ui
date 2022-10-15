@@ -50,8 +50,8 @@ class _MyAppState extends State<MyApp> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const <Widget>[
-                            Expanded(
+                          children: <Widget>[
+                            const Expanded(
                               child: Text(
                                 'TAGS',
                                 textAlign: TextAlign.left,
@@ -62,9 +62,12 @@ class _MyAppState extends State<MyApp> {
                               ),
                             ),
                             Expanded(
-                              child: Icon(
-                                Icons.add,
-                                size: 50.0,
+                              child: IconButton(
+                                onPressed: () {
+                                  // Implement add tag
+                                  print("Add button pressed");
+                                },
+                                icon: const Icon(Icons.add),
                                 color: Colors.white,
                               ),
                             )
@@ -79,36 +82,41 @@ class _MyAppState extends State<MyApp> {
                           itemBuilder: (context, i) {
                             return Container(
                               padding: const EdgeInsets.all(10),
-                              child: InkWell(
-                                onTap: () {
-                                  print("list element ${tagList[i]} clicked");
-                                  // TODO: implement the actual thing
-                                },
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      tagList.elementAt(i),
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 40,
-                                          fontStyle: FontStyle.italic),
-                                    ),
-                                    Expanded(
-                                      child: Container(),
-                                    ),
-                                    const Icon(
-                                      Icons.remove,
-                                      size: 32,
-                                      color: Colors.white,
-                                    ),
-                                    const SizedBox(width: 12),
-                                    const Icon(
-                                      Icons.edit,
-                                      size: 32,
-                                      color: Colors.white,
-                                    )
-                                  ],
-                                ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: TextButton(
+                                        onPressed: () {
+                                          // Implement tag click
+                                          print("tag ${tagList[i]} clicked");
+                                        },
+                                        child: Text(
+                                          tagList.elementAt(i),
+                                          textAlign: TextAlign.left,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 40,
+                                              fontStyle: FontStyle.italic),
+                                        )),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      // TODO: Implement Remove
+                                      print("remove for ${tagList[i]} clicked");
+                                    },
+                                    icon: const Icon(Icons.remove),
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  IconButton(
+                                    onPressed: () {
+                                      // TODO: Implement Edit
+                                      print("edit for ${tagList[i]} clicked");
+                                    },
+                                    icon: const Icon(Icons.edit),
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
                             );
                           },
