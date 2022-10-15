@@ -68,22 +68,28 @@ class _MyAppState extends State<MyApp> {
                           itemBuilder: (context, i) {
                             return Container(
                               padding: const EdgeInsets.all(10),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    tagList.elementAt(i),
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 40,
-                                        fontStyle: FontStyle.italic),
-                                  ),
-                                  Expanded(
-                                    child: Container(),
-                                  ),
-                                  const Icon(Icons.remove, size: 32),
-                                  const SizedBox(width: 12),
-                                  const Icon(Icons.edit, size: 32)
-                                ],
+                              child: InkWell(
+                                onTap: () {
+                                  print("list element ${tagList[i]} clicked");
+                                  // TODO: implement the actual thing
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      tagList.elementAt(i),
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 40,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    const Icon(Icons.remove, size: 32),
+                                    const SizedBox(width: 12),
+                                    const Icon(Icons.edit, size: 32)
+                                  ],
+                                ),
                               ),
                             );
                           },
