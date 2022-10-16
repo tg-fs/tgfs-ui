@@ -17,6 +17,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late TextEditingController editTagTextController;
   List<String> tagList = [];
   var fileNames = <String>[];
   var filePaths = <String>[];
@@ -33,7 +34,14 @@ class _MyAppState extends State<MyApp> {
     fileNames = ["inferno.pdf", "japanesesong.mp3", "bottle.png"];
     filePaths = ["/home/lain", "/mnt/hd1/music", "/home/chococandy/Pictures"];
 
+    editTagTextController = TextEditingController();
     super.initState();
+  }
+
+  void dispose() {
+    editTagTextController.dispose();
+
+    super.dispose();
   }
 
   // This widget is the root of your application.
@@ -133,9 +141,8 @@ class _MyAppState extends State<MyApp> {
                                     const SizedBox(width: 12),
                                     IconButton(
                                       onPressed: () {
-                                        // TODO: Implement Edit
-                                        print(
-                                            "edit for ${tagList.elementAt(i)} clicked");
+                                        editTagDialog(
+                                            context, tagList.elementAt(i));
                                       },
                                       icon: const Icon(Icons.edit),
                                       color: Colors.white,
@@ -226,6 +233,34 @@ class _MyAppState extends State<MyApp> {
       tagList = tags;
     });
   }
+
+  Future editTagDialog(BuildContext context, String tagName) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text("Edit tag $tagName"),
+            content: TextField(
+              autofocus: true,
+              controller: editTagTextController,
+              decoration: const InputDecoration(hintText: 'Enter new name'),
+            ),
+            actions: [
+              TextButton(
+                child: const Text('SAVE'),
+                onPressed: () async {
+                  ProcessResult tgfsOutput = await Process.run(
+                      'tgfs', ['edit', tagName, editTagTextController.text]);
+                  fetchTags();
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('CANCEL'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          ));
 
   void deleteTag(String tagName) async {
     // tgfs delete tagName
