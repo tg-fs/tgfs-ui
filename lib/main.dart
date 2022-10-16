@@ -85,7 +85,9 @@ class _MyAppState extends State<MyApp> {
                             IconButton(
                               onPressed: () {
                                 // Implement add tag
+                                //addTags(tagName);
                                 print("Add button pressed");
+                                //addTags();
                               },
                               icon: const Icon(Icons.add),
                               color: Colors.white,
@@ -125,7 +127,7 @@ class _MyAppState extends State<MyApp> {
                                         // TODO: Implement Delete
                                         print(
                                             "remove for ${tagList.elementAt(i)} clicked");
-                                        deleteTag(tagList.elementAt(i));
+                                        deleteTags(tagList.elementAt(i));
                                       },
                                       icon: const Icon(Icons.remove),
                                       color: Colors.white,
@@ -227,7 +229,35 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void deleteTag(String tagName) async {
+  void deleteTags(String tagName) async {
     // tgfs delete tagName
+    ProcessResult tgfsOutput = await Process.run('tgfs', ['delete','tagName']);
+    fetchTags();
+    LineSplitter ls = const LineSplitter();
+    List<String> tags = ls.convert(tgfsOutput.stdout);
+    tags.sort();
+
+    setState(() {
+      tagList = tags;
+    });
   }
+
+  void addTags(String tagName)async{
+    //tgfs create tagName
+     ProcessResult tgfsOutput = await Process.run('tgfs', ['create','tagName']);
+    fetchTags();
+    LineSplitter ls = const LineSplitter();
+    List<String> tags = ls.convert(tgfsOutput.stdout);
+    tags.sort();
+
+    setState(() {
+      tagList = tags;
+    });
+
+
+  }
+
+
+
+
 }
