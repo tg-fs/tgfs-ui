@@ -18,6 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late TextEditingController editTagTextController;
+  late TextEditingController createTagTextController;
   List<String> tagList = [];
   var fileNames = <String>[];
   var filePaths = <String>[];
@@ -95,7 +96,8 @@ class _MyAppState extends State<MyApp> {
                                 // Implement add tag
                                 //addTags(tagName);
                                 print("Add button pressed");
-                                //addTags();
+                                addTagDialog(
+                                            context);
                               },
                               icon: const Icon(Icons.add),
                               color: Colors.white,
@@ -266,16 +268,32 @@ class _MyAppState extends State<MyApp> {
     fetchTags();
   }
 
-  void addTags(String tagName) async {
-    //tgfs create tagName
-    ProcessResult tgfsOutput = await Process.run('tgfs', ['create', 'tagName']);
-    fetchTags();
-    LineSplitter ls = const LineSplitter();
-    List<String> tags = ls.convert(tgfsOutput.stdout);
-    tags.sort();
+ Future addTagDialog(BuildContext context) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text("Add TAG"),
+            content: TextField(
+              autofocus: true,
+              controller: createTagTextController,
+              decoration: const InputDecoration(hintText: 'Enter new tag name:'),
+            ),
+            actions: [
+              TextButton(
+                child: const Text('SAVE'),
+                onPressed: () async {
+                  ProcessResult tgfsOutput = await Process.run(
+                      'tgfs', ['create', createTagTextController.text]);
+                  fetchTags();
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('CANCEL'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          ));
 
-    setState(() {
-      tagList = tags;
-    });
-  }
 }
