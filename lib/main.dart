@@ -177,17 +177,20 @@ class _MyAppState extends State<MyApp> {
                         ElevatedButton(
                           style: style,
                           onPressed: () async {
-                            FilePickerResult? result = await FilePicker.platform
-                                .pickFiles(allowMultiple: true);
-                            if (result != null) {
-                              List<String> files = result.paths
-                                  .map((path) => path.toString())
-                                  .toList();
-                              files.insert(0, "add");
-                              files.insert(1, activeTag);
+                            if (activeTag != "") {
+                              FilePickerResult? result = await FilePicker
+                                  .platform
+                                  .pickFiles(allowMultiple: true);
+                              if (result != null) {
+                                List<String> files = result.paths
+                                    .map((path) => path.toString())
+                                    .toList();
+                                files.insert(0, "add");
+                                files.insert(1, activeTag);
 
-                              await Process.run("tgfs", files);
-                              fetchFileList();
+                                await Process.run("tgfs", files);
+                                fetchFileList();
+                              }
                             }
                           },
                           child: const Text('Add Files'),
