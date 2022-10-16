@@ -175,8 +175,7 @@ class _MyAppState extends State<MyApp> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 40, fontWeight: FontWeight.bold)),
-                        Expanded ( child : Container()),
-                        
+                        Expanded(child: Container()),
                         const SizedBox(height: 30),
                         ElevatedButton(
                           style: style,
@@ -189,27 +188,37 @@ class _MyAppState extends State<MyApp> {
                       //fileNames and filePaths
                       itemCount: fileNames.length,
                       itemBuilder: (context, i) {
-                        return Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              Text(
-                                fileNames.elementAt(i),
-                                textAlign: TextAlign.left,
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 18, 15, 15),
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.italic),
-                              ),
-                              Text(
-                                filePaths.elementAt(i),
-                                textAlign: TextAlign.left,
-                                style: const TextStyle(
-                                    color: Color.fromARGB(255, 148, 144, 144),
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.italic),
-                              )
-                            ],
+                        return Card(
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                          ),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                Text(
+                                  fileNames.elementAt(i),
+                                  textAlign: TextAlign.left,
+                                  style: const TextStyle(
+                                      color: Color.fromARGB(255, 18, 15, 15),
+                                      fontSize: 20,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                                Text(
+                                  filePaths.elementAt(i),
+                                  textAlign: TextAlign.left,
+                                  style: const TextStyle(
+                                      color: Color.fromARGB(255, 148, 144, 144),
+                                      fontSize: 20,
+                                      fontStyle: FontStyle.italic),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },
