@@ -234,6 +234,7 @@ class _MyAppState extends State<MyApp> {
                                     IconButton(
                                       onPressed: () {
                                         //sshjh
+                                         deleteFiles(tagList.elementAt(i),filePaths.elementAt(i));
                                       },
                                       icon: const Icon(
                                           Icons.delete_forever_outlined),
@@ -352,6 +353,13 @@ class _MyAppState extends State<MyApp> {
               )
             ],
           ));
+ void deleteFiles(String tagName, String filePath) async {
+    ProcessResult tgfsOutput = await Process.run('tgfs', ['remove',tagName,filePath]);
+     fetchFileList();
+  }
+
+
+
 
   void fetchFileList() async {
     ProcessResult tgfsOutput = await Process.run('tgfs', ["ls", activeTag]);
