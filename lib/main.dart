@@ -191,6 +191,11 @@ class _MyAppState extends State<MyApp> {
                                 await Process.run("tgfs", files);
                                 fetchFileList();
                               }
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content:
+                                          Text('Please select a tag first')));
                             }
                           },
                           child: const Text('Add Files'),
