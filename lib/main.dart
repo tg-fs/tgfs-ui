@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   var filePaths = <String>[];
   @override
   final ButtonStyle style = ElevatedButton.styleFrom(
-      textStyle: const TextStyle(fontSize: 30),
+      textStyle: const TextStyle(fontSize: 20),
       backgroundColor:
           MaterialStateColor.resolveWith((states) => Colors.lightBlue),
       padding: EdgeInsets.all(20));
@@ -129,7 +129,7 @@ class _MyAppState extends State<MyApp> {
                                         textAlign: TextAlign.left,
                                         style: const TextStyle(
                                             color: Colors.white,
-                                            fontSize: 40,
+                                            fontSize: 30,
                                             fontStyle: FontStyle.italic),
                                       )),
                                 ),
@@ -175,6 +175,8 @@ class _MyAppState extends State<MyApp> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 40, fontWeight: FontWeight.bold)),
+                        Expanded ( child : Container()),
+                        
                         const SizedBox(height: 30),
                         ElevatedButton(
                           style: style,
@@ -196,15 +198,15 @@ class _MyAppState extends State<MyApp> {
                                 textAlign: TextAlign.left,
                                 style: const TextStyle(
                                     color: Color.fromARGB(255, 18, 15, 15),
-                                    fontSize: 18,
+                                    fontSize: 20,
                                     fontStyle: FontStyle.italic),
                               ),
                               Text(
                                 filePaths.elementAt(i),
                                 textAlign: TextAlign.left,
                                 style: const TextStyle(
-                                    color: Color.fromARGB(255, 18, 15, 15),
-                                    fontSize: 18,
+                                    color: Color.fromARGB(255, 148, 144, 144),
+                                    fontSize: 20,
                                     fontStyle: FontStyle.italic),
                               )
                             ],
