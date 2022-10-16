@@ -80,6 +80,7 @@ class _MyAppState extends State<MyApp> {
                       ),
 
 //2nd Column:
+
                       Expanded(
                         child: ListView.builder(
                           itemCount: tagList.length,
@@ -138,10 +139,30 @@ class _MyAppState extends State<MyApp> {
                     width: 800,
                     color: shadeColor,
                     child: Column(children: [
-                      const Text('FOLDERS',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.bold)),
+                      Expanded(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                            const Text('FOLDERS',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 40, fontWeight: FontWeight.bold)),
+                            TextButton(
+                                
+                                onPressed: () {
+                                  // Implement add files click
+                                  print("file added");
+                                },
+                                child: const Text(
+                                  "Add files",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 23, 18, 18),
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ])),
                       Expanded(
                         child: ListView.builder(
                           //fileNames and filePaths
