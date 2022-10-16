@@ -21,13 +21,15 @@ class _MyAppState extends State<MyApp> {
   var fileNames = <String>[];
   var filePaths = <String>[];
   @override
-
-    
-  final ButtonStyle style =
-        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 30),backgroundColor: MaterialStateColor.resolveWith((states) => Colors.lightBlue),padding: EdgeInsets.all(20));
+  final ButtonStyle style = ElevatedButton.styleFrom(
+      textStyle: const TextStyle(fontSize: 30),
+      backgroundColor:
+          MaterialStateColor.resolveWith((states) => Colors.lightBlue),
+      padding: EdgeInsets.all(20));
 
   void initState() {
     fetchTags();
+
     fileNames = ["inferno.pdf", "japanesesong.mp3", "bottle.png"];
     filePaths = ["/home/lain", "/mnt/hd1/music", "/home/chococandy/Pictures"];
 
@@ -120,9 +122,10 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                     IconButton(
                                       onPressed: () {
-                                        // TODO: Implement Remove
+                                        // TODO: Implement Delete
                                         print(
                                             "remove for ${tagList.elementAt(i)} clicked");
+                                        deleteTag(tagList.elementAt(i));
                                       },
                                       icon: const Icon(Icons.remove),
                                       color: Colors.white,
@@ -163,14 +166,12 @@ class _MyAppState extends State<MyApp> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 40, fontWeight: FontWeight.bold)),
-
-                           const SizedBox(height: 30),
-          ElevatedButton(
-            style: style,
-            onPressed: () {},
-            child: const Text('Add Files'),
-            
-          ),
+                            const SizedBox(height: 30),
+                            ElevatedButton(
+                              style: style,
+                              onPressed: () {},
+                              child: const Text('Add Files'),
+                            ),
                           ])),
                       Expanded(
                         child: ListView.builder(
@@ -216,7 +217,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void fetchTags() async {
-    ProcessResult tgfsOutput = await Process.run('zsh', ['-c', 'tgfs tags']);
+    ProcessResult tgfsOutput = await Process.run('tgfs', ['tags']);
     LineSplitter ls = const LineSplitter();
     List<String> tags = ls.convert(tgfsOutput.stdout);
     tags.sort();
@@ -224,5 +225,9 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       tagList = tags;
     });
+  }
+
+  void deleteTag(String tagName) async {
+    // tgfs delete tagName
   }
 }
