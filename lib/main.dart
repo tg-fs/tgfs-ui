@@ -201,6 +201,10 @@ class _MyAppState extends State<MyApp> {
                           child: const Text('Add Files'),
                         ),
                       ])),
+                  Text(activeTag,
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   Expanded(
                     child: ListView.builder(
                       //fileNames and filePaths
@@ -234,7 +238,8 @@ class _MyAppState extends State<MyApp> {
                                     IconButton(
                                       onPressed: () {
                                         //sshjh
-                                         deleteFiles(tagList.elementAt(i),filePaths.elementAt(i));
+                                        deleteFiles(tagList.elementAt(i),
+                                            filePaths.elementAt(i));
                                       },
                                       icon: const Icon(
                                           Icons.delete_forever_outlined),
@@ -353,13 +358,11 @@ class _MyAppState extends State<MyApp> {
               )
             ],
           ));
- void deleteFiles(String tagName, String filePath) async {
-    ProcessResult tgfsOutput = await Process.run('tgfs', ['remove',tagName,filePath]);
-     fetchFileList();
+  void deleteFiles(String tagName, String filePath) async {
+    ProcessResult tgfsOutput =
+        await Process.run('tgfs', ['remove', tagName, filePath]);
+    fetchFileList();
   }
-
-
-
 
   void fetchFileList() async {
     ProcessResult tgfsOutput = await Process.run('tgfs', ["ls", activeTag]);
