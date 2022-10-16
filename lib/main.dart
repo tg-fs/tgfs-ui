@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:tgfs_ui/vars.dart';
@@ -14,7 +17,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var tagList = <String>[];
+  List<String> tagList = [];
   var fileNames = <String>[];
   var filePaths = <String>[];
   @override
@@ -24,9 +27,10 @@ class _MyAppState extends State<MyApp> {
         ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 30),backgroundColor: MaterialStateColor.resolveWith((states) => Colors.lightBlue),padding: EdgeInsets.all(20));
 
   void initState() {
-    tagList = ["movies", "books", "music"];
+    fetchTags();
     fileNames = ["inferno.pdf", "japanesesong.mp3", "bottle.png"];
     filePaths = ["/home/lain", "/mnt/hd1/music", "/home/chococandy/Pictures"];
+
     super.initState();
   }
 
@@ -60,25 +64,29 @@ class _MyAppState extends State<MyApp> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            const Expanded(
-                              child: Text(
-                                'TAGS',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                            const Text(
+                              'TAGS',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold),
                             ),
-                            Expanded(
-                              child: IconButton(
-                                onPressed: () {
-                                  // Implement add tag
-                                  print("Add button pressed");
-                                },
-                                icon: const Icon(Icons.add),
-                                color: Colors.white,
-                              ),
+                            Expanded(child: Container()),
+                            IconButton(
+                              onPressed: () {
+                                fetchTags();
+                              },
+                              icon: const Icon(Icons.refresh),
+                              color: Colors.white,
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                // Implement add tag
+                                print("Add button pressed");
+                              },
+                              icon: const Icon(Icons.add),
+                              color: Colors.white,
                             )
                           ],
                         ),
@@ -88,49 +96,51 @@ class _MyAppState extends State<MyApp> {
 
                       Expanded(
                         child: ListView.builder(
-                          itemCount: tagList.length,
-                          itemBuilder: (context, i) {
-                            return Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextButton(
-                                        onPressed: () {
-                                          // Implement tag click
-                                          print("tag ${tagList[i]} clicked");
-                                        },
-                                        child: Text(
-                                          tagList.elementAt(i),
-                                          textAlign: TextAlign.left,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 40,
-                                              fontStyle: FontStyle.italic),
-                                        )),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      // TODO: Implement Remove
-                                      print("remove for ${tagList[i]} clicked");
-                                    },
-                                    icon: const Icon(Icons.remove),
-                                    color: Colors.white,
-                                  ),
-                                  const SizedBox(width: 12),
-                                  IconButton(
-                                    onPressed: () {
-                                      // TODO: Implement Edit
-                                      print("edit for ${tagList[i]} clicked");
-                                    },
-                                    icon: const Icon(Icons.edit),
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                            itemCount: tagList.length,
+                            itemBuilder: (context, i) {
+                              return Container(
+                                padding: const EdgeInsets.all(10),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextButton(
+                                          onPressed: () {
+                                            // Implement tag click
+                                            print(
+                                                "tag ${tagList.elementAt(i)} clicked");
+                                          },
+                                          child: Text(
+                                            tagList.elementAt(i),
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 40,
+                                                fontStyle: FontStyle.italic),
+                                          )),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        // TODO: Implement Remove
+                                        print(
+                                            "remove for ${tagList.elementAt(i)} clicked");
+                                      },
+                                      icon: const Icon(Icons.remove),
+                                      color: Colors.white,
+                                    ),
+                                    const SizedBox(width: 12),
+                                    IconButton(
+                                      onPressed: () {
+                                        // TODO: Implement Edit
+                                        print(
+                                            "edit for ${tagList.elementAt(i)} clicked");
+                                      },
+                                      icon: const Icon(Icons.edit),
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
                       )
                     ],
                   ),
@@ -203,5 +213,16 @@ class _MyAppState extends State<MyApp> {
           // height: 1000,
           // width: 700,
         ));
+  }
+
+  void fetchTags() async {
+    ProcessResult tgfsOutput = await Process.run('zsh', ['-c', 'tgfs tags']);
+    LineSplitter ls = const LineSplitter();
+    List<String> tags = ls.convert(tgfsOutput.stdout);
+    tags.sort();
+
+    setState(() {
+      tagList = tags;
+    });
   }
 }
