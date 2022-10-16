@@ -18,6 +18,11 @@ class _MyAppState extends State<MyApp> {
   var fileNames = <String>[];
   var filePaths = <String>[];
   @override
+
+    
+  final ButtonStyle style =
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 30),backgroundColor: MaterialStateColor.resolveWith((states) => Colors.lightBlue),padding: EdgeInsets.all(20));
+
   void initState() {
     tagList = ["movies", "books", "music"];
     fileNames = ["inferno.pdf", "japanesesong.mp3", "bottle.png"];
@@ -148,20 +153,14 @@ class _MyAppState extends State<MyApp> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 40, fontWeight: FontWeight.bold)),
-                            TextButton(
-                                
-                                onPressed: () {
-                                  // Implement add files click
-                                  print("file added");
-                                },
-                                child: const Text(
-                                  "Add files",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 23, 18, 18),
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold),
-                                )),
+
+                           const SizedBox(height: 30),
+          ElevatedButton(
+            style: style,
+            onPressed: () {},
+            child: const Text('Add Files'),
+            
+          ),
                           ])),
                       Expanded(
                         child: ListView.builder(
