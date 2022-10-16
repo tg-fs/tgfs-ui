@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:open_url/open_url.dart';
+
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:tgfs_ui/vars.dart';
@@ -11,7 +13,7 @@ void main() {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyApp()));
+      home: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -256,7 +258,7 @@ class _MyAppState extends State<MyApp> {
                                     TextButton(
                                       child: const Text('OPEN'),
                                       onPressed: () async {
-                                        Navigator.of(context).pop();
+                                        await openUrl(filePaths.elementAt(i));
                                       },
                                     ),
                                   ],
