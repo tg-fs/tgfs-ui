@@ -201,22 +201,49 @@ class _MyAppState extends State<MyApp> {
                             padding: const EdgeInsets.all(10),
                             child: Column(
                               children: [
-                                Text(
-                                  fileNames.elementAt(i),
-                                  textAlign: TextAlign.left,
-                                  style: const TextStyle(
-                                      color: Color.fromARGB(255, 18, 15, 15),
-                                      fontSize: 20,
-                                      fontStyle: FontStyle.italic),
+                                Row(
+                                  children: [
+                                    Text(
+                                      fileNames.elementAt(i),
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 18, 15, 15),
+                                          fontSize: 20,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                    Expanded(child: Container()),
+                                    IconButton(
+                                      onPressed: () {
+                                        //sshjh
+                                      },
+                                      icon: const Icon(
+                                          Icons.delete_forever_outlined),
+                                      color: Color.fromARGB(255, 22, 21, 21),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  filePaths.elementAt(i),
-                                  textAlign: TextAlign.left,
-                                  style: const TextStyle(
-                                      color: Color.fromARGB(255, 148, 144, 144),
-                                      fontSize: 20,
-                                      fontStyle: FontStyle.italic),
-                                )
+                                Row(
+                                  children: [
+                                    Text(
+                                      filePaths.elementAt(i),
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 148, 144, 144),
+                                          fontSize: 20,
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                    Expanded(child: Container()),
+                                    TextButton(
+                                      child: const Text('OPEN'),
+                                      onPressed: () async {
+                                  
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
