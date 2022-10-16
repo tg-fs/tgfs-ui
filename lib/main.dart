@@ -124,9 +124,6 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                     IconButton(
                                       onPressed: () {
-                                        // TODO: Implement Delete
-                                        print(
-                                            "remove for ${tagList.elementAt(i)} clicked");
                                         deleteTags(tagList.elementAt(i));
                                       },
                                       icon: const Icon(Icons.remove),
@@ -231,20 +228,13 @@ class _MyAppState extends State<MyApp> {
 
   void deleteTags(String tagName) async {
     // tgfs delete tagName
-    ProcessResult tgfsOutput = await Process.run('tgfs', ['delete','tagName']);
+    await Process.run('tgfs', ['delete', tagName]);
     fetchTags();
-    LineSplitter ls = const LineSplitter();
-    List<String> tags = ls.convert(tgfsOutput.stdout);
-    tags.sort();
-
-    setState(() {
-      tagList = tags;
-    });
   }
 
-  void addTags(String tagName)async{
+  void addTags(String tagName) async {
     //tgfs create tagName
-     ProcessResult tgfsOutput = await Process.run('tgfs', ['create','tagName']);
+    ProcessResult tgfsOutput = await Process.run('tgfs', ['create', 'tagName']);
     fetchTags();
     LineSplitter ls = const LineSplitter();
     List<String> tags = ls.convert(tgfsOutput.stdout);
@@ -253,11 +243,5 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       tagList = tags;
     });
-
-
   }
-
-
-
-
 }
