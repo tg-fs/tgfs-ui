@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
+import 'package:file_picker/file_picker.dart';
 import 'package:tgfs_ui/vars.dart';
 
 void main() {
@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
   List<String> tagList = [];
   var fileNames = <String>[];
   var filePaths = <String>[];
+  String activeTag = "";
   @override
   final ButtonStyle style = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20),
@@ -36,9 +37,6 @@ class _MyAppState extends State<MyApp> {
 
   void initState() {
     fetchTags();
-
-    fileNames = ["inferno.pdf", "japanesesong.mp3", "bottle.png"];
-    filePaths = ["/home/lain", "/mnt/hd1/music", "/home/chococandy/Pictures"];
 
     editTagTextController = TextEditingController();
     createTagTextController = TextEditingController();
@@ -120,9 +118,8 @@ class _MyAppState extends State<MyApp> {
                                 Expanded(
                                   child: TextButton(
                                       onPressed: () {
-                                        // Implement tag click
-                                        print(
-                                            "tag ${tagList.elementAt(i)} clicked");
+                                        activeTag = tagList.elementAt(i);
+                                        fetchFileList();
                                       },
                                       child: Text(
                                         tagList.elementAt(i),
@@ -179,7 +176,20 @@ class _MyAppState extends State<MyApp> {
                         const SizedBox(height: 30),
                         ElevatedButton(
                           style: style,
-                          onPressed: () {},
+                          onPressed: () async {
+                            FilePickerResult? result = await FilePicker.platform
+                                .pickFiles(allowMultiple: true);
+                            if (result != null) {
+                              List<String> files = result.paths
+                                  .map((path) => path.toString())
+                                  .toList();
+                              files.insert(0, "add");
+                              files.insert(1, activeTag);
+
+                              await Process.run("tgfs", files);
+                              fetchFileList();
+                            }
+                          },
                           child: const Text('Add Files'),
                         ),
                       ])),
@@ -238,7 +248,6 @@ class _MyAppState extends State<MyApp> {
                                     TextButton(
                                       child: const Text('OPEN'),
                                       onPressed: () async {
-                                  
                                         Navigator.of(context).pop();
                                       },
                                     ),
@@ -335,4 +344,20 @@ class _MyAppState extends State<MyApp> {
               )
             ],
           ));
+
+  void fetchFileList() async {
+    ProcessResult tgfsOutput = await Process.run('tgfs', ["ls", activeTag]);
+    LineSplitter ls = const LineSplitter();
+    List<String> files = ls.convert(tgfsOutput.stdout);
+    List<String> _fileNames = [];
+
+    for (String file in files) {
+      _fileNames.add(File(file).path.split(Platform.pathSeparator).last);
+    }
+
+    setState(() {
+      filePaths = files;
+      fileNames = _fileNames;
+    });
+  }
 }
